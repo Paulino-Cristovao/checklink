@@ -77,6 +77,10 @@ reports/
 *_test/
 *.pdf
 
+# Exception: Keep example reports for demonstration
+!example_reports/
+!example_reports/*.pdf
+
 # Logs
 *.log
 
