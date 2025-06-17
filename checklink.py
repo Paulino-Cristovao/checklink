@@ -1,7 +1,30 @@
 #!/usr/bin/env python3
 """
-CheckLink - Comprehensive Website Link Checker and Content Analyzer
-Analyzes websites for broken links, scam content, and relevance issues.
+CheckLink - Multi-Language Website Link Analyzer
+
+A comprehensive tool for analyzing multi-language websites for broken links, 
+scam content, and content relevance issues. Generates professional PDF reports 
+organized by language.
+
+Features:
+- Multi-language detection and analysis
+- Broken link detection (HTTP errors, timeouts)
+- AI-powered scam and malicious content detection
+- Content relevance scoring
+- Professional PDF report generation
+- Rate limiting and respectful crawling
+
+Author: Paulino Cristovão
+Repository: https://github.com/Paulino-Cristovao/checklink
+License: MIT
+
+Usage:
+    python checklink.py <URL> [options]
+    
+Examples:
+    python checklink.py https://example.com
+    python checklink.py https://site.com --depth 2 --output-dir results
+    python checklink.py https://site.com --openai-key "sk-..." --delay 0.5
 """
 
 import requests
