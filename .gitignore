@@ -77,9 +77,9 @@ reports/
 *_test/
 *.pdf
 
-# Exception: Keep example reports for demonstration
-!example_reports/
-!example_reports/*.pdf
+# Exception: Keep final reports for demonstration
+!final_reports/
+!final_reports/*.pdf
 
 # Logs
 *.log
