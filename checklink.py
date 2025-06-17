@@ -120,17 +120,38 @@ Respond in JSON format:
             'vertrauenswürdigsten paypal online casinos', 'ppc24'
         ]
         
+        # Embassy/Mozambique relevance keywords
+        embassy_keywords = [
+            'embassy', 'consulate', 'mozambique', 'maputo', 'visa', 'passport',
+            'diplomatic', 'consular', 'embassy services', 'citizen services',
+            'travel document', 'mozambican', 'diplomatic mission'
+        ]
+        
         suspicious = any(keyword in content_lower for keyword in scam_keywords)
         
-        # Basic relevance check
+        # Enhanced relevance check for embassy/mozambique content
         goal_words = main_website_goal.lower().split()
-        relevance_score = min(10, max(1, sum(1 for word in goal_words if word in content_lower) * 2))
+        embassy_matches = sum(1 for keyword in embassy_keywords if keyword in content_lower)
+        goal_matches = sum(1 for word in goal_words if word in content_lower)
+        
+        # Calculate relevance score (1-10)
+        relevance_score = min(10, max(1, (embassy_matches * 3) + (goal_matches * 2)))
+        
+        # Determine if content is irrelevant
+        is_irrelevant = relevance_score < 3 and embassy_matches == 0
+        
+        reasons = []
+        if suspicious:
+            reasons.append("Contains suspicious/scam keywords")
+        if is_irrelevant:
+            reasons.append("Content not related to embassy/diplomatic services")
         
         return {
             "relevance_score": relevance_score,
             "is_suspicious": suspicious,
-            "reasons": ["Keyword-based analysis"] if suspicious else [],
-            "summary": f"Relevance: {relevance_score}/10, Suspicious: {suspicious}"
+            "is_irrelevant": is_irrelevant,
+            "reasons": reasons,
+            "summary": f"Relevance: {relevance_score}/10, Suspicious: {suspicious}, Irrelevant: {is_irrelevant}"
         }
 
 
